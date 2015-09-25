@@ -25,11 +25,14 @@ script:
   - perlbrew install-cpanm --force
   - perlbrew install $VERSION --as $NAME $ARGS --notest
   - if [ -n $ALIAS ]; then perlbrew alias create $NAME $ALIAS; fi
+  - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
+  - if [ -n $ALIAS ]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
+
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
 
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
-  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}-archive.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/perls/$NAME
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}-archive.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 
 addons:

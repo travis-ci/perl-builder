@@ -10,8 +10,7 @@ matrix:
         - docker
       env:
         - RELEASE=trusty
-    - sudo: false
-      env:
+    - env:
         - RELEASE=precise
 
 env:
@@ -25,7 +24,7 @@ install:
   - \curl -L http://install.perlbrew.pl | bash
 
 script:
-  - perlbrew install-cpanm
+  - perlbrew install-cpanm --force
   - perlbrew install $VERSION --as $NAME $ARGS
   - if [ -n $ALIAS ]; then perlbrew alias create $NAME $ALIAS; fi
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done

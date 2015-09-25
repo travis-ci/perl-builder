@@ -1,0 +1,35 @@
+language: perl
+
+perl:
+  - '5.20'
+
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+      env:
+        - RELEASE=trusty
+    - sudo: false
+      env:
+        - RELEASE=precise
+
+env:
+  global:
+    - VERSION='perl-5.22.0'
+    - NAME='5.22'
+    - ALIAS='5.22'
+    - ARGS=''
+    - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
+install:
+  - \curl -L http://install.perlbrew.pl | bash
+
+script:
+  - perlbrew install-cpanm
+  - perlbrew install $VERSION --as $NAME $ARGS
+  - if [ -n $ALIAS ]; then perlbrew alias create $NAME $ALIAS; fi
+  - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
+
+after_success:
+  - ls -l
+  - tar cjvf $TRAVIS_BUILD_DIR/$(lsb_release -rs)/perl-${VERSION}-archive.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME

@@ -17,6 +17,7 @@ env:
     - ALIAS=''
     - ARGS=''
     - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
+    - LSB_RELEASE=$(lsb_release -rs)
 install:
   - \curl -L http://install.perlbrew.pl | bash
 
@@ -27,5 +28,13 @@ script:
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
 
 after_success:
-  - ls -l
-  - tar cjf $TRAVIS_BUILD_DIR/$(lsb_release -rs)/perl-${NAME}-archive.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/perls/$NAME
+  - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}-archive.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/perls/$NAME
+  - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
+
+addons:
+  artifacts:
+    paths:
+    - $LSB_RELEASE/
+    target_paths:
+    - /$LSB_RELEASE

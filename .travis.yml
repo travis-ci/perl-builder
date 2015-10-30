@@ -20,6 +20,7 @@ env:
     - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
 install:
   - \curl -L http://install.perlbrew.pl | bash
+  - export PATH=$HOME/perl5/perlbrew/bin:$PATH
 
 before_script:
   - export LSB_RELEASE=$(lsb_release -rs 2>/dev/null || sw_vers -productVersion | sed 's/^\([0-9][0-9]*.[0-9][0-9]*\).*/\1/')

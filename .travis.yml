@@ -9,6 +9,7 @@ matrix:
         - RELEASE=trusty
     - env:
         - RELEASE=precise
+    - os: osx
 
 env:
   global:

@@ -29,9 +29,9 @@ script:
   - perlbrew install-cpanm --force
   - perlbrew install $VERSION --as $NAME $ARGS --notest
   - if [[ x$ALIAS != x ]]; then perlbrew alias create $NAME $ALIAS; fi
+  - perlbrew list
   - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
   - if [[ x$ALIAS != x ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
-
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
 
 after_success:

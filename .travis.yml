@@ -28,16 +28,16 @@ before_script:
 script:
   - perlbrew install-cpanm --force
   - perlbrew install $VERSION --as $NAME $ARGS --notest
-  - if [[ x$ALIAS != $ALIAS ]]; then perlbrew alias create $NAME $ALIAS; fi
+  - if [[ x$ALIAS != x ]]; then perlbrew alias create $NAME $ALIAS; fi
   - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
-  - if [[ x$ALIAS != $ALIAS ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
+  - if [[ x$ALIAS != x ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
 
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
 
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
   - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
-  - if [[ x$ALIAS != $ALIAS ]]; then tar cjLf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS; fi
+  - if [[ x$ALIAS != x ]]; then tar cjLf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS; fi
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 
 addons:

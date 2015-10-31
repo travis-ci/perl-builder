@@ -19,9 +19,9 @@ matrix:
 
 env:
   global:
-    - VERSION='perl-5.16.3'
-    - NAME='5.16.3'
-    - ALIAS='5.16'
+    - VERSION='perl-5.18.4'
+    - NAME='5.18.4'
+    - ALIAS='5.18'
     - ARGS=''
     - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
 install:

@@ -19,9 +19,9 @@ matrix:
 
 env:
   global:
-    - VERSION='perl-5.14.4'
-    - NAME='5.14.4
-    - ALIAS='5.14'
+    - VERSION='perl-5.22.0'
+    - NAME='5.22.0'
+    - ALIAS='5.22'
     - ARGS=''
     - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
 install:
@@ -30,7 +30,7 @@ install:
 
 before_script:
   - export LSB_RELEASE=$(lsb_release -rs 2>/dev/null || sw_vers -productVersion | sed 's/^\([0-9][0-9]*.[0-9][0-9]*\).*/\1/')
-  - 'export OS_NAME=${OS_NAME:-$(lsb_release -is 2>/dev/null || echo "osx" | tr "A-Z" "a-z")}'
+  - 'export OS_NAME=${OS_NAME:-$((lsb_release -is 2>/dev/null || echo "osx") | tr "A-Z" "a-z")}'
   - export ARCH=$(uname -m)
 
 script:

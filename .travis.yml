@@ -10,6 +10,8 @@ matrix:
     - env:
         - RELEASE=precise
     - os: osx
+    - os: osx
+      osx_image: xcode7.2b1
 
 env:
   global:

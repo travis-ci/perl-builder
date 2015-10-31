@@ -10,8 +10,12 @@ matrix:
     - env:
         - RELEASE=precise
     - os: osx
+      env:
+        - RELEASE=mavericks
     - os: osx
       osx_image: xcode7.2b1
+      env:
+        - RELEASE=el_capitan
 
 env:
   global:

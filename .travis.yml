@@ -28,7 +28,7 @@ before_script:
   - export ARCH=$(uname -m)
 
 script:
-  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
+  - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then echo 'source $HOME/perl5/perlbrew/etc/bashrc' >> $HOME/.bash_profile; fi
   - perlbrew install-cpanm --force
   - perlbrew install $VERSION --as $NAME $ARGS --notest
   - if [[ x$ALIAS != x ]]; then perlbrew alias create $NAME $ALIAS; fi

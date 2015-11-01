@@ -42,7 +42,7 @@ before_script:
 script:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
   - perlbrew install-cpanm --force
-  - perlbrew uninstall $NAME
+  - perlbrew uninstall $NAME || true
   - ( sleep 5 ; tail -f ~/perl5/perlbrew/build.perl-5.22.0.log ) &
   - perlbrew install $VERSION --as $NAME $ARGS --notest
   - if [[ x$ALIAS != x ]]; then perlbrew uninstall $ALIAS || true; perlbrew alias -f create $NAME $ALIAS || true; fi

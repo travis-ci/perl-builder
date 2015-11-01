@@ -18,11 +18,30 @@ matrix:
     #     - RELEASE=el_capitan
 
 env:
-  global:
+  matrix:
+    - VERSION='perl-5.8.8'
+      NAME='5.8'
+    - VERSION='perl-5.10.1'
+      NAME='5.10'
+    - VERSION='perl-5.12.5'
+      NAME='5.12'
+    - VERSION='perl-5.14.4'
+      NAME='5.14'
+    - VERSION='perl-5.16.3'
+      NAME='5.16'
+    - VERSION='perl-5.18.4'
+      NAME='5.18'
+    - VERSION='perl-5.20.0'
+      NAME='5.20'
     - VERSION='perl-5.20.3'
-    - NAME='5.20-extras'
-    - ALIAS='5.20-shrplib'
-    - ARGS='-Duseshrplib -Duseithreads'
+      NAME='5.20-extras'
+      ALIAS='5.20-shrplib'
+      ARGS='-Duseshrplib -Duseithreads'
+    - VERSION='perl-5.22.0'
+      NAME='5.22-extras'
+      ALIAS='5.22-shrplib'
+      ARGS='-Duseshrplib -Duseithreads'
+  global:
     - MODULES='Dist::Zilla Dist::Zilla::Plugin::Bootstrap::lib ExtUtils::MakeMaker LWP Module::Install Moose Test::Exception Test::Most Test::Pod Test::Pod::Coverage'
 install:
   - \curl -L http://install.perlbrew.pl | bash

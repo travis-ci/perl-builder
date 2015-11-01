@@ -3,10 +3,9 @@ language: perl
 matrix:
   include:
     - sudo: required
-      services:
-        - docker
-      env:
-        - RELEASE=trusty
+      services: docker
+    #   env:
+    #     - RELEASE=trusty
     # - env:
     #     - RELEASE=precise
     # - os: osx

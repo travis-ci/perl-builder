@@ -4,6 +4,8 @@ matrix:
   include:
     - sudo: required
       services: docker
+      env:
+      - VERSION='perl-5.22.0' NAME='5.22-extras' ALIAS='5.22-shrplib' ARGS='-Duseshrplib -Duseithreads'
     #   env:
     #     - RELEASE=trusty
     # - env:
@@ -26,7 +28,7 @@ env:
   - VERSION='perl-5.18.4' NAME='5.18'
   - VERSION='perl-5.20.0' NAME='5.20'
   - VERSION='perl-5.20.3' NAME='5.20-extras' ALIAS='5.20-shrplib' ARGS='-Duseshrplib -Duseithreads'
-  - VERSION='perl-5.22.0' NAME='5.22-extras' ALIAS='5.22-shrplib' ARGS='-Duseshrplib -Duseithreads'
+    # - VERSION='perl-5.22.0' NAME='5.22-extras' ALIAS='5.22-shrplib' ARGS='-Duseshrplib -Duseithreads'
   global:
   - MODULES='Dist::Zilla Dist::Zilla::Plugin::Bootstrap::lib ExtUtils::MakeMaker LWP Module::Install Moose Test::Exception Test::Most Test::Pod Test::Pod::Coverage'
 install:

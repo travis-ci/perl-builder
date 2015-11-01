@@ -19,9 +19,9 @@ matrix:
 
 env:
   global:
-    - VERSION='perl-5.22.0'
-    - NAME='5.22-extras'
-    - ALIAS='5.22-shrplib'
+    - VERSION='perl-5.20.3'
+    - NAME='5.20-extras'
+    - ALIAS='5.20-shrplib'
     - ARGS='-Duseshrplib -Duseithreads'
     - MODULES='Dist::Zilla Dist::Zilla::Plugin::Bootstrap::lib ExtUtils::MakeMaker LWP Module::Install Moose Test::Exception Test::Most Test::Pod Test::Pod::Coverage'
 install:

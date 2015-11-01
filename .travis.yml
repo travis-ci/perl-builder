@@ -54,6 +54,7 @@ script:
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
   - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/${VERSION}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
   - if [[ x$ALIAS != x ]]; then tar cjhf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS; fi
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 

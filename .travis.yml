@@ -1,35 +1,29 @@
-language: ruby
+language: perl
 
-sudo: required
-
-services: docker
-
-# matrix:
-#   include:
-#   - sudo: required
-#     services: docker
-#     env: RELEASE=trusty
-#   - env: RELEASE=precise
-#   - os: osx
-#     env: RELEASE=mavericks
-#   - os: osx
-#     osx_image: xcode7.2b1
-#     env: RELEASE=el_capitan
+matrix:
+  include:
+    - sudo: required
+      services:
+        - docker
+      env:
+        - RELEASE=trusty
+    - env:
+        - RELEASE=precise
+    - os: osx
+      env:
+        - RELEASE=mavericks
+    - os: osx
+      osx_image: xcode7.2b1
+      env:
+        - RELEASE=el_capitan
 
 env:
-  matrix:
-  - VERSION='perl-5.8.8' NAME='5.8'
-  - VERSION='perl-5.10.1' NAME='5.10'
-  - VERSION='perl-5.12.5' NAME='5.12'
-  - VERSION='perl-5.14.4' NAME='5.14'
-  - VERSION='perl-5.16.3' NAME='5.16'
-  - VERSION='perl-5.18.4' NAME='5.18'
-  - VERSION='perl-5.20.0' NAME='5.20'
-  - VERSION='perl-5.20.3' NAME='5.20-extras' ALIAS='5.20-shrplib' ARGS='-Duseshrplib -Duseithreads'
-  - VERSION='perl-5.22.0' NAME='5.22-extras' ALIAS='5.22-shrplib' ARGS='-Duseshrplib -Duseithreads'
   global:
-  - MODULES='Dist::Zilla Dist::Zilla::Plugin::Bootstrap::lib ExtUtils::MakeMaker LWP Module::Install Moose Test::Exception Test::Most Test::Pod Test::Pod::Coverage'
-
+    - VERSION='perl-5.20.3'
+    - NAME='5.20.3'
+    - ALIAS='5.20'
+    - ARGS=''
+    - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
 install:
   - \curl -L http://install.perlbrew.pl | bash
   - export PATH=$HOME/perl5/perlbrew/bin:$PATH
@@ -42,8 +36,6 @@ before_script:
 script:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
   - perlbrew install-cpanm --force
-  - perlbrew uninstall $NAME || true
-  - ( sleep 5 ; tail -f ~/perl5/perlbrew/build.perl-5.22.0.log ) &
   - perlbrew install $VERSION --as $NAME $ARGS --notest
   - if [[ x$ALIAS != x ]]; then perlbrew uninstall $ALIAS || true; perlbrew alias -f create $NAME $ALIAS || true; fi
   - perlbrew list
@@ -54,7 +46,6 @@ script:
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
   - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
-  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/${VERSION}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME
   - if [[ x$ALIAS != x ]]; then tar cjhf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$ALIAS; fi
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 

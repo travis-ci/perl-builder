@@ -22,7 +22,6 @@ env:
     - VERSION='perl-5.24.0'
     - NAME='5.24'
     - ARGS=''
-    - MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'
 install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then sudo chown -R $USER $HOME/perl5/; fi
   - \curl -L http://install.perlbrew.pl | bash
@@ -42,6 +41,7 @@ script:
   - perlbrew list
   - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
   - if [[ x$ALIAS != x ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
+  - if [[ -z "${MODULES}" ]]; then export MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'; fi
   - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
 
 after_success:

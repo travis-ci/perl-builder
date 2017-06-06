@@ -9,18 +9,18 @@ matrix:
         - RELEASE=trusty
     - env:
         - RELEASE=precise
-    - os: osx
-      osx_image: xcode6.4
-      env:
-        - RELEASE=yosemite
+    # - os: osx
+    #   osx_image: xcode6.4
+    #   env:
+    #     - RELEASE=yosemite
     - os: osx
       osx_image: xcode7.3
       env:
         - RELEASE=el_capitan
-    - os: osx
-      osx_image: xcode8.3
-      env:
-        - RELEASE=sierra
+    # - os: osx
+    #   osx_image: xcode8.3
+    #   env:
+    #     - RELEASE=sierra
 
 env:
   global:

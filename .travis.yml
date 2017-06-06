@@ -19,8 +19,7 @@ matrix:
 
 env:
   global:
-    - VERSION='perl-5.24.0'
-    - NAME='5.24'
+    - VERSION='5.24'
     - ARGS=''
 install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then sudo chown -R $USER $HOME/perl5/; fi
@@ -35,19 +34,19 @@ before_script:
 script:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
   - perlbrew install-cpanm --force
-  - (perlbrew list | grep $NAME) && perlbrew uninstall $NAME || true
-  - perlbrew install $VERSION --as $NAME $ARGS --notest
-  - if [[ x$ALIAS != x ]]; then perlbrew uninstall $ALIAS || true; perlbrew alias -f create $NAME $ALIAS || true; fi
+  - (perlbrew list | grep $VERSION) && perlbrew uninstall $VERSION || true
+  - perlbrew install perl-$VERSION --as $VERSION $ARGS --notest
+  - if [[ x$ALIAS != x ]]; then perlbrew uninstall $ALIAS || true; perlbrew alias -f create $VERSION $ALIAS || true; fi
   - perlbrew list
   - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
   - if [[ x$ALIAS != x ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi
   - if [[ -z "${MODULES}" ]]; then export MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'; fi
-  - for module in $MODULES; do perlbrew use $NAME && cpanm $module --force --notest; done
+  - for module in $MODULES; do perlbrew use $VERSION && cpanm $module --force --notest; done
 
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
-  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME $HOME/perl5/perlbrew/bin
-  - if [[ x$ALIAS != x ]]; then tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$NAME $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/bin; fi
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${VERSION}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/bin
+  - if [[ x$ALIAS != x ]]; then tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/bin; fi
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 
 addons:

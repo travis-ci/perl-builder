@@ -40,9 +40,9 @@ before_script:
 script:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
   - perlbrew install-cpanm --force
-  - (perlbrew list | grep $VERSION) && perlbrew uninstall $VERSION || true
+  - (perlbrew list | grep $VERSION) && (yes | perlbrew uninstall $VERSION) || true
   - perlbrew install perl-$VERSION --as $VERSION $ARGS --notest
-  - if [[ x$ALIAS != x ]]; then perlbrew uninstall $ALIAS || true; perlbrew alias -f create $VERSION $ALIAS || true; fi
+  - if [[ x$ALIAS != x ]]; then (yes | perlbrew uninstall $ALIAS) || true; perlbrew alias -f create $VERSION $ALIAS || true; fi
   - perlbrew list
   - TAR_PATHS='$HOME/perl5/perlbrew/perls/$ALIAS'
   - if [[ x$ALIAS != x ]]; then TAR_PATHS="$TAR_PATHS $HOME/perl5/perlbrew/perls/$ALIAS"; fi

@@ -9,11 +9,13 @@ matrix:
       env:
         - RELEASE=xenial
     - sudo: required
+      dist: trusty
       services:
         - docker
       env:
         - RELEASE=trusty
-    - env:
+    - dist: precise
+      env:
         - RELEASE=precise
     # - os: osx
     #   osx_image: xcode6.4

@@ -1,5 +1,7 @@
 language: perl
 
+perl: '5.22.0'
+
 matrix:
   include:
     - sudo: required
@@ -59,7 +61,7 @@ script:
 
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/
-  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME:${VERSION}}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/bin
+  - tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${NAME:-${VERSION}}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/bin
   - if [[ x$ALIAS != x ]]; then tar cjf $TRAVIS_BUILD_DIR/$LSB_RELEASE/perl-${ALIAS}.tar.bz2 $HOME/perl5/perlbrew/perls/$VERSION $HOME/perl5/perlbrew/perls/$ALIAS $HOME/perl5/perlbrew/bin; fi
   - ls -l $TRAVIS_BUILD_DIR/$LSB_RELEASE
 

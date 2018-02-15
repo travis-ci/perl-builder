@@ -30,7 +30,7 @@ matrix:
 
 env:
   global:
-    - VERSION='5.24.0'
+    - VERSION='5.24.3'
     - ALIAS='5.24'
     - ARGS=''
 install:

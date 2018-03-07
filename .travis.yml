@@ -33,10 +33,10 @@ matrix:
       osx_image: xcode7.3
       env:
         - RELEASE=el_capitan
-    # - os: osx
-    #   osx_image: xcode8.3
-    #   env:
-    #     - RELEASE=sierra
+    - os: osx
+      osx_image: xcode8.3
+      env:
+        - RELEASE=sierra
     - arch: ppc64le
       dist: xenial
       group: edge
@@ -48,6 +48,7 @@ env:
     - ALIAS='5.24'
     - ARGS=''
 install:
+  - if [[ ! -d $HOME/perl5 ]]; then mkdir $HOME/perl5; fi
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then sudo chown -R $USER $HOME/perl5/; fi
   - \curl -L http://install.perlbrew.pl | bash
   - export PATH=$HOME/perl5/perlbrew/bin:$PATH
@@ -61,7 +62,7 @@ script:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then source $HOME/perl5/perlbrew/etc/bashrc; fi
   - perlbrew install-cpanm --force
   - (perlbrew list | grep $VERSION) && (yes | perlbrew uninstall $VERSION) || true
-  - perlbrew install perl-$VERSION --as $VERSION $ARGS --notest
+  - perlbrew install perl-$VERSION --as $VERSION $ARGS --notest || (cat $HOME/perl5/perlbrew/build.perl-5.*.log ; false)
   - |
     if [[ x$ALIAS != x ]]; then
       for alias in $ALIAS; do
@@ -76,7 +77,7 @@ script:
       perlbrew list
     fi
   - if [[ -z "${MODULES}" ]]; then export MODULES='ExtUtils::MakeMaker Dist::Zilla Moose Test::Pod Test::Pod::Coverage Test::Exception Dist::Zilla::Plugin::Bootstrap::lib LWP Module::Install Test::Most'; fi
-  - for module in $MODULES; do perlbrew use $VERSION && cpanm $module --force --notest; done
+  - for module in $MODULES; do perlbrew use $VERSION && cpanm $module --quiet --force --notest; done
 
 after_success:
   - mkdir -p $TRAVIS_BUILD_DIR/$LSB_RELEASE/

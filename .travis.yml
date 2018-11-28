@@ -11,8 +11,8 @@ matrix:
         - RELEASE=xenial
 env:
   global:
-    - VERSION='5.26.2'
-    - ALIAS='5.26'
+    - VERSION='5.28.0'
+    - ALIAS='5.28'
     - ARGS=''
 install:
   - if [[ $TRAVIS_OS_NAME = 'osx' ]]; then sudo chown -R $USER $HOME/perl5/; fi

@@ -31,7 +31,7 @@ matrix:
     #   osx_image: xcode8.3
     #   env:
     #     - RELEASE=sierra
-    - os: linux-ppc64le
+    - arch: ppc64le
       dist: xenial
       group: edge
       env:

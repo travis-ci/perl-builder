@@ -6,8 +6,8 @@ builds Perl distributions with perlbrew
 Use [travis-nightly-builder](https://github.com/travis-ci/travis-nightly-builder).
 Set up environment as described there, and then run, e.g.,
 
-	bundle exec rake build['perl-builder','master',"VERSION=5.22.0"]
+	bundle exec rake build['perl-builder','default',"VERSION=5.22.0"]
 
 or
 
-    bundle exec rake build['perl-builder','master',"VERSION=5.22.0 NAME=5.22-extras ALIAS=5.22-shrlibs ARGS='-Duseshrplib -Duseithreads'"]
+    bundle exec rake build['perl-builder','default',"VERSION=5.22.0 NAME=5.22-extras ALIAS=5.22-shrlibs ARGS='-Duseshrplib -Duseithreads'"]

@@ -2,7 +2,7 @@ language: perl
 
 perl: '5.22.0'
 
-matrix:
+jobs:
   include:
     - sudo: required
       language: minimal

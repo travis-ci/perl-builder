@@ -1,7 +1,5 @@
 language: perl
 
-os: linux
-
 perl: '5.22.0'
 
 jobs:
@@ -9,19 +7,23 @@ jobs:
     - sudo: required
       language: minimal
       dist: bionic
+      os: linux
       group: dev
       name: bionic
     - sudo: required
       language: minimal
       dist: xenial
+      os: linux
       group: edge
       name: xenial
     - sudo: required
       dist: trusty
+      os: linux
       services:
         - docker
       name: trusty
     - dist: precise
+      os: linux
       name: precise
     # - os: osx
     #   osx_image: xcode6.4
@@ -36,6 +38,7 @@ jobs:
     #     - RELEASE=sierra
     - arch: ppc64le
       dist: xenial
+      os: linux
       group: edge
       name: xenial-ppc64le
 env:

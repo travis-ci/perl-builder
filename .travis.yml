@@ -1,5 +1,7 @@
 language: perl
 
+os: linux
+
 perl: '5.22.0'
 
 jobs:
@@ -8,31 +10,26 @@ jobs:
       language: minimal
       dist: bionic
       group: dev
-      env:
-        - RELEASE=bionic
+      name: bionic
     - sudo: required
       language: minimal
       dist: xenial
       group: edge
-      env:
-        - RELEASE=xenial
+      name: xenial
     - sudo: required
       dist: trusty
       services:
         - docker
-      env:
-        - RELEASE=trusty
+      name: trusty
     - dist: precise
-      env:
-        - RELEASE=precise
+      name: precise
     # - os: osx
     #   osx_image: xcode6.4
     #   env:
     #     - RELEASE=yosemite
     - os: osx
       osx_image: xcode7.3
-      env:
-        - RELEASE=el_capitan
+      name: el_capitan
     # - os: osx
     #   osx_image: xcode8.3
     #   env:
@@ -40,8 +37,7 @@ jobs:
     - arch: ppc64le
       dist: xenial
       group: edge
-      env:
-        - RELEASE=xenial
+      name: xenial-ppc64le
 env:
   global:
     - VERSION='5.24.3'

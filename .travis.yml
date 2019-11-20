@@ -39,8 +39,33 @@ jobs:
     - arch: ppc64le
       dist: xenial
       os: linux
-      group: edge
       name: xenial-ppc64le
+      language: c
+    - arch: ppc64le
+      dist: bionic
+      os: linux
+      name: bionic-ppc64le
+      language: c
+    - arch: s390x
+      dist: xenial
+      os: linux
+      name: xenial-s390x
+      language: c
+    - arch: s390x
+      dist: bionic
+      os: linux
+      name: bionic-s390x
+      language: c
+    - arch: arm64
+      dist: xenial
+      os: linux
+      name: xenial-arm64
+      language: c
+    - arch: arm64
+      dist: bionic
+      os: linux
+      name: bionic-arm64
+      language: c
 env:
   global:
     - VERSION='5.24.3'

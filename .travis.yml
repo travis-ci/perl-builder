@@ -41,6 +41,17 @@ jobs:
       os: linux
       group: edge
       name: xenial-ppc64le
+    - arch: arm64-graviton2
+      dist: focal
+      os: linux
+      group: edge
+      virt: lxd
+      name: focal-arm64-graviton2
+    - dist: focal
+      os: linux
+      name: focal
+      group: dev
+  
 env:
   global:
     - VERSION='5.24.3'

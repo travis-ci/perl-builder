@@ -50,6 +50,7 @@ jobs:
     - dist: focal
       os: linux
       name: focal
+      group: dev
   
 env:
   global:

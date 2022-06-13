@@ -51,7 +51,11 @@ jobs:
       os: linux
       name: focal
       group: dev
-  
+    - dist: jammy
+      os: linux
+      name: jammy
+      group: dev
+
 env:
   global:
     - VERSION='5.24.3'

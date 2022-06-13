@@ -52,6 +52,7 @@ jobs:
       name: focal
       group: dev
     - dist: jammy
+      language: minimal
       os: linux
       name: jammy
       group: dev

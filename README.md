@@ -1,5 +1,5 @@
 # perl-builder
-builds Perl distributions with perlbrew
+Builds Perl distributions with perlbrew
 
 ## Building with ease
 
